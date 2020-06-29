@@ -1,0 +1,33 @@
+.popup{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  z-index: 2;
+  &.active{
+    opacity: 1;
+    visibility: visible;
+  }
+  &__title{
+    background-color: darkcyan;
+    font-size: 24px;
+    color: #fff;
+    padding:16px 24px ;
+  }
+  &__back{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.5);
+  }
+
+}

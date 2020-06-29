@@ -1,0 +1,129 @@
+*{
+  margin: 0;
+  box-sizing: border-box;
+}
+body{
+  font-size: 16px;
+  line-height: 1;
+  font-family: sans-serif;
+}
+svg{
+  max-width: 100%;
+  max-height: 100%;
+  fill: currentColor;
+}
+.d-none{
+  display: none;
+}
+.page{
+  display: flex;
+  width: 100%;
+  position: relative;
+  &__back{
+    background-color: rgba(0,0,0,0.6);
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    &.active{
+      z-index: 2;
+    }
+  }
+}
+.hold{
+  border: 2px solid red;
+  background-color: #fff!important;
+  opacity: 1;
+ }
+.invisible{
+  display: none;
+}
+[draggable] {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
+}
+.col{
+  width: 25%;
+  display: flex;
+  z-index: 1;
+  position: relative;
+  flex-direction: column;
+  min-height: 100vh;
+  &:after{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    background-color: rgba(#fff ,0.5);
+    content: "";
+  }
+  &.misty{
+    &:after{
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+  &__title{
+    padding: 20px 0;
+    font-size: 32px;
+    text-align: center;
+    color: #e8e8e8;
+    user-select: none;
+  }
+  &__content{
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    /*flex-grow: 1;*/
+    & > *:not(:first-child){
+      margin-top: 15px;
+    }
+  }
+  .add-card{
+    cursor: pointer;
+    transition: 0.2s;
+    &:hover{
+      color: #fff;
+      background-color: darkcyan;
+    }
+  }
+  &--backlog &__title{
+     background-color: dimgrey;
+   }
+  &--selected &__title{
+    background-color: yellowgreen;
+  }
+  &--running &__title{
+    background-color: darkred;
+  }
+  &--evaluation &__title{
+    background-color: darkblue;
+  }
+  &--live &__title{
+    background-color: darkgreen;
+  }
+  &--backlog{
+    background-color: darken(dimgrey,10);
+  }
+  &--selected{
+    background-color: darken(yellowgreen,10);
+  }
+  &--running{
+    background-color: darken(darkred,10);
+  }
+  &--evaluation{
+    background-color: darken(darkblue,10);
+  }
+  &--live{
+    background-color: darken(darkgreen,10);
+  }
+}

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="dist/index.css">
+</head>
+<body>
+<div class="d-none">
+    <svg id="iconConfig" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"></path></svg>
+</div>
+<div class="page">
+   <div class="col col--backlog" data-col="backlog">
+       <p class="col__title">BackLog</p>
+       <div class="col__content" data-container>
+           <div class="card" draggable="true" data-card>
+               <p class="card__title">
+                   Changes bundle landing page
+               </p>
+               <span class="card__sett" data-cardRedactor="redact"><svg><use xlink:href="#iconConfig"></use></svg></span>
+               <p class="card__desc"></p>
+               <div class="card__labels"></div>
+           </div>
+           <div class="card" draggable="true" data-card>
+               <input type="hidden" value="" name="id">
+               <p class="card__title">
+                   landing page
+               </p>
+               <span class="card__sett" data-cardRedactor="redact"><svg><use xlink:href="#iconConfig"></use></svg></span>
+               <p class="card__desc"></p>
+               <div class="card__labels"></div>
+           </div>
+       </div>
+       <p class="add-card" data-cardRedactor="create">+</p>
+   </div>
+   <div class="col col--selected" data-col="selected">
+       <p class="col__title">Selected</p>
+       <div class="col__content" data-container="">
+
+       </div>
+       <p class="add-card" data-cardRedactor="create">+</p>
+   </div>
+   <div class="col col--running" data-col="running">
+       <p class="col__title">Running</p>
+       <div class="col__content" data-container>
+
+       </div>
+       <p class="add-card" data-cardRedactor="create">+</p>
+   </div>
+   <div class="col col--evaluation" data-col="evaluation">
+       <p class="col__title">Evaluation</p>
+       <div class="col__content" data-container>
+
+       </div>
+       <p class="add-card" data-cardRedactor="create">+</p>
+   </div>
+   <div class="col col--live" data-col="live">
+       <p class="col__title">Live</p>
+       <div class="col__content" data-container>
+
+       </div>
+       <p class="add-card" data-cardRedactor="create">+</p>
+   </div>
+</div>
+<div class="popup" id="cardRedactor">
+    <div class="popup__back" data-popupclose></div>
+    <div class="card-redactor">
+        <p class="popup__title">Card redactor</p>
+        <form class="card-redactor__form" id="cardForm">
+            <label>
+                <span class="card-redactor__title">Title</span>
+                <input type="text" name="title">
+                <span class="card__msg">Card should have a title</span>
+            </label>
+            <label>
+                <span class="card-redactor__title">Desctiption</span>
+                <textarea name="desc"></textarea>
+            </label>
+            <div class="card-redactor__labels">
+                <span class="card-redactor__title">Labels</span>
+                <label class="card__label card__label--UiDesign">
+                    <input type="checkbox" name="labels" value="UiDesign">
+                    <span>Ui Design</span>
+                </label>
+                <label class="card__label card__label--Marketing">
+                    <input type="checkbox" name="labels" value="Marketing">
+                    <span>Marketing</span>
+                </label>
+                <label class="card__label card__label--Research">
+                    <input type="checkbox" name="labels" value="Research">
+                    <span>Research</span>
+                </label>
+            </div>
+            <button type="submit" class="card-redactor__btn">Submit</button>
+        </form>
+    </div>
+</div>
+<script src="dist/index.js"></script>
+</body>
+</html>
