@@ -1,3 +1,4 @@
+//developer vladyslav Kukhlii 2020
 const fields = document.querySelectorAll('.col');
 const cardRedactor = document.getElementById('cardRedactor');
 const searchForm = document.getElementById('search');
