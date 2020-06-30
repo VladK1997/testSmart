@@ -271,13 +271,12 @@ let allCards = [];//here's put all cards
         },0)
     }
 
-    function dragEnd(el) {
+    function dragEnd() {
         currentDragItem.classList.remove('invisible','hold');
         currentDragItem.removeEventListener('dragend',dragEnd);
-
     }
 
-    function dragEnter(e) {
+    function dragEnter() {
         this.className +=' misty';
     }
 
@@ -291,6 +290,8 @@ let allCards = [];//here's put all cards
         updateCardsCounter();
         chengeStatus(currentDragItem,this.dataset.status);
     }
+
+
 })();
 
 
