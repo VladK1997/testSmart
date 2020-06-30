@@ -9,4 +9,11 @@
   background-color: #c8c8c8;
   border-radius: 50%;
   margin: 0 auto;
+  cursor: pointer;
+  transition: 0.2s;
+  &:hover{
+    color: #fff;
+    background-color: darkcyan;
+  }
+
 }

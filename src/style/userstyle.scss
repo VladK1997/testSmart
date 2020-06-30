@@ -1,3 +1,19 @@
+$main-red: darkred;
+$main-grey: dimgrey;
+$main-green: darkgreen;
+$main-blue: #48a9f8;
+$main-yellow: #c7aa38;
+%scrollBar{
+  scrollbar-width: none;//mozilla
+  &::-webkit-scrollbar {//-webkit-
+    display: none;
+  }
+  &::-webkit-scrollbar-thumb{
+    display: none;
+  }
+  -ms-overflow-style: none;// IE
+}
+
 *{
   margin: 0;
   box-sizing: border-box;
@@ -6,6 +22,7 @@ body{
   font-size: 16px;
   line-height: 1;
   font-family: sans-serif;
+
 }
 svg{
   max-width: 100%;
@@ -17,20 +34,58 @@ svg{
 }
 .page{
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   width: 100%;
+  min-height: 100vh;
   position: relative;
-  &__back{
-    background-color: rgba(0,0,0,0.6);
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    position: absolute;
-    left: 0;
-    top: 0;
-    &.active{
-      z-index: 2;
+
+  &--loading{
+    &:after{
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-color: #0d0121;
+      content: '';
+    }
+    .loader{
+      opacity: 1;
+      visibility: visible;
     }
   }
+}
+.loader{
+  transition: 1.5s;
+  opacity: 0;
+  visibility: hidden;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0d0121;
+  z-index: 11;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  p{
+    position: absolute;
+    bottom: 20%;
+    width: 100%;
+    font-size: 40px;
+    color: #fff;
+    text-align: center;
+  }
+}
+.content{
+  display: flex;
+  flex-grow: 1;
+  width: 100%;
 }
 .hold{
   border: 2px solid red;
@@ -40,6 +95,11 @@ svg{
 .invisible{
   display: none;
 }
+svg{
+  max-width: 100%;
+  max-height: 100%;
+  fill: currentColor;
+}
 [draggable] {
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -48,13 +108,49 @@ svg{
   -khtml-user-drag: element;
   -webkit-user-drag: element;
 }
+
+.search{
+  display: flex;
+  input{
+    outline: none;
+    transition: 0.3s;
+    width: 0;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid darkcyan;
+    padding: 0;
+    transform: translate3d(0,0,0);
+    font-size: 18px;
+    &:focus{
+      width: 300px;
+      padding: 4px 8px;
+    }
+  }
+  &__icon{
+    display: block;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    &:hover{
+      color: darkcyan;
+    }
+  }
+}
 .col{
-  width: 25%;
+  width: 20%;
   display: flex;
   z-index: 1;
   position: relative;
   flex-direction: column;
-  min-height: 100vh;
+  height: calc(100vh - 60px);
+  overflow-y: scroll;
+  padding-bottom: 20px;
+  @extend %scrollBar;
+  &__icon{
+    width: 30px;
+    height: 30px;
+    margin-right: 16px;
+  }
   &:after{
     width: 100%;
     height: 100%;
@@ -72,11 +168,20 @@ svg{
       visibility: visible;
     }
   }
+  &__title-text{
+    display: flex;
+  }
   &__title{
-    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    padding: 20px 15px;
     font-size: 32px;
     text-align: center;
-    color: #e8e8e8;
+    display: flex;
+    justify-content: space-between;
+    color: #e1e1e1;
     user-select: none;
   }
   &__content{
@@ -88,42 +193,36 @@ svg{
       margin-top: 15px;
     }
   }
-  .add-card{
-    cursor: pointer;
-    transition: 0.2s;
-    &:hover{
-      color: #fff;
-      background-color: darkcyan;
-    }
-  }
+
   &--backlog &__title{
-     background-color: dimgrey;
+     background-color: $main-grey;
    }
+
   &--selected &__title{
-    background-color: yellowgreen;
+    background-color: darken($main-yellow,10);
   }
   &--running &__title{
-    background-color: darkred;
+    background-color: darken($main-red,5);
   }
   &--evaluation &__title{
-    background-color: darkblue;
+    background-color: darken(#3887c6,10);
   }
   &--live &__title{
-    background-color: darkgreen;
+    background-color: $main-green;
   }
   &--backlog{
-    background-color: darken(dimgrey,10);
+    background-color: darken($main-grey,10);
   }
   &--selected{
-    background-color: darken(yellowgreen,10);
+    background-color: darken($main-yellow,20);
   }
   &--running{
-    background-color: darken(darkred,10);
+    background-color: darken($main-red,10);
   }
   &--evaluation{
-    background-color: darken(darkblue,10);
+    background-color: darken(#3887c6,20);
   }
   &--live{
-    background-color: darken(darkgreen,10);
+    background-color: darken($main-green,10);
   }
 }

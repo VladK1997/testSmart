@@ -12,75 +12,108 @@
 <div class="d-none">
     <svg id="iconConfig" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"></path></svg>
 </div>
-<div class="page">
-   <div class="col col--backlog" data-col="backlog">
-       <p class="col__title">BackLog</p>
-       <div class="col__content" data-container>
-           <div class="card" draggable="true" data-card>
-               <p class="card__title">
-                   Changes bundle landing page
-               </p>
-               <span class="card__sett" data-cardRedactor="redact"><svg><use xlink:href="#iconConfig"></use></svg></span>
-               <p class="card__desc"></p>
-               <div class="card__labels"></div>
-           </div>
-           <div class="card" draggable="true" data-card>
-               <input type="hidden" value="" name="id">
-               <p class="card__title">
-                   landing page
-               </p>
-               <span class="card__sett" data-cardRedactor="redact"><svg><use xlink:href="#iconConfig"></use></svg></span>
-               <p class="card__desc"></p>
-               <div class="card__labels"></div>
-           </div>
-       </div>
+<div class="page page--loading">
+    <div class="loader">
+        <img src="dist/img/load.gif">
+        <p>Vladyslav Kukhlii dev.</p>
+    </div>
+    <header class="header">
+        <div class="header__tools">
+            <p class="header__add-card add-card" data-cardRedactor="createstatus">+</p>
+            <form id="search">
+                <label class="search">
+                    <input type="text" autocomplete="false" name="search">
+                    <span class="search__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+            </span>
+                </label>
+            </form>
+        </div>
+    </header>
+    <div class="content">
+   <div class="col col--backlog" data-status="backlog">
+       <p class="col__title">
+           <span class="col__title-text">
+               <span class="col__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M176 80c-52.94 0-96 43.06-96 96 0 8.84 7.16 16 16 16s16-7.16 16-16c0-35.3 28.72-64 64-64 8.84 0 16-7.16 16-16s-7.16-16-16-16zM96.06 459.17c0 3.15.93 6.22 2.68 8.84l24.51 36.84c2.97 4.46 7.97 7.14 13.32 7.14h78.85c5.36 0 10.36-2.68 13.32-7.14l24.51-36.84c1.74-2.62 2.67-5.7 2.68-8.84l.05-43.18H96.02l.04 43.18zM176 0C73.72 0 0 82.97 0 176c0 44.37 16.45 84.85 43.56 115.78 16.64 18.99 42.74 58.8 52.42 92.16v.06h48v-.12c-.01-4.77-.72-9.51-2.15-14.07-5.59-17.81-22.82-64.77-62.17-109.67-20.54-23.43-31.52-53.15-31.61-84.14-.2-73.64 59.67-128 127.95-128 70.58 0 128 57.42 128 128 0 30.97-11.24 60.85-31.65 84.14-39.11 44.61-56.42 91.47-62.1 109.46a47.507 47.507 0 0 0-2.22 14.3v.1h48v-.05c9.68-33.37 35.78-73.18 52.42-92.16C335.55 260.85 352 220.37 352 176 352 78.8 273.2 0 176 0z"></path></svg></span>
+               BackLog
+           </span>
+           <span class="col__counter">0</span>
+       </p>
+       <div class="col__content" data-container></div>
        <p class="add-card" data-cardRedactor="create">+</p>
    </div>
-   <div class="col col--selected" data-col="selected">
-       <p class="col__title">Selected</p>
-       <div class="col__content" data-container="">
-
-       </div>
+   <div class="col col--selected" data-status="selected">
+       <p class="col__title">
+           <span class="col__title-text">
+               <span class="col__icon">
+                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M507.31 84.69L464 41.37c-6-6-14.14-9.37-22.63-9.37H288V16c0-8.84-7.16-16-16-16h-32c-8.84 0-16 7.16-16 16v16H56c-13.25 0-24 10.75-24 24v80c0 13.25 10.75 24 24 24h385.37c8.49 0 16.62-3.37 22.63-9.37l43.31-43.31c6.25-6.26 6.25-16.38 0-22.63zM224 496c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16V384h-64v112zm232-272H288v-32h-64v32H70.63c-8.49 0-16.62 3.37-22.63 9.37L4.69 276.69c-6.25 6.25-6.25 16.38 0 22.63L48 342.63c6 6 14.14 9.37 22.63 9.37H456c13.25 0 24-10.75 24-24v-80c0-13.25-10.75-24-24-24z"></path></svg>
+               </span>
+               Selected
+           </span>
+           <span class="col__counter">0</span></p>
+       <div class="col__content" data-container></div>
        <p class="add-card" data-cardRedactor="create">+</p>
    </div>
-   <div class="col col--running" data-col="running">
-       <p class="col__title">Running</p>
-       <div class="col__content" data-container>
+   <div class="col col--running" data-status="running">
 
-       </div>
+       <p class="col__title">
+           <span class="col__title-text">
+               <span class="col__icon">
+                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"></path></svg>
+               </span>
+               Running
+            </span>
+           <span class="col__counter">0</span>
+       </p>
+       <div class="col__content" data-container></div>
        <p class="add-card" data-cardRedactor="create">+</p>
    </div>
-   <div class="col col--evaluation" data-col="evaluation">
-       <p class="col__title">Evaluation</p>
-       <div class="col__content" data-container>
-
-       </div>
+   <div class="col col--evaluation" data-status="evaluation">
+       <p class="col__title">
+           <span class="col__title-text">
+               <span class="col__icon">
+                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zM262.655 90c-54.497 0-89.255 22.957-116.549 63.758-3.536 5.286-2.353 12.415 2.715 16.258l34.699 26.31c5.205 3.947 12.621 3.008 16.665-2.122 17.864-22.658 30.113-35.797 57.303-35.797 20.429 0 45.698 13.148 45.698 32.958 0 14.976-12.363 22.667-32.534 33.976C247.128 238.528 216 254.941 216 296v4c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12v-1.333c0-28.462 83.186-29.647 83.186-106.667 0-58.002-60.165-102-116.531-102zM256 338c-25.365 0-46 20.635-46 46 0 25.364 20.635 46 46 46s46-20.636 46-46c0-25.365-20.635-46-46-46z"></path></svg>
+               </span>
+               Evaluation
+            </span>
+           <span class="col__counter">0</span></p>
+       <div class="col__content" data-container></div>
        <p class="add-card" data-cardRedactor="create">+</p>
    </div>
-   <div class="col col--live" data-col="live">
-       <p class="col__title">Live</p>
-       <div class="col__content" data-container>
-
-       </div>
+   <div class="col col--live" data-status="live">
+       <p class="col__title">
+           <span class="col__title-text">
+               <span class="col__icon">
+                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>
+               </span>
+               Live
+            </span>
+           <span class="col__counter">0</span></p>
+       <div class="col__content" data-container></div>
        <p class="add-card" data-cardRedactor="create">+</p>
    </div>
 </div>
 <div class="popup" id="cardRedactor">
     <div class="popup__back" data-popupclose></div>
     <div class="card-redactor">
+        <div class="card-redactor__operation operation">
+            <div class="operation__content"></div>
+        </div>
         <p class="popup__title">Card redactor</p>
         <form class="card-redactor__form" id="cardForm">
             <label>
-                <span class="card-redactor__title">Title</span>
+                <p class="card-redactor__title">Title</p>
                 <input type="text" name="title">
-                <span class="card__msg">Card should have a title</span>
+                <span class="card-redactor__msg">Card should have a title</span>
             </label>
             <label>
-                <span class="card-redactor__title">Desctiption</span>
+                <p class="card-redactor__title">Desctiption</p>
                 <textarea name="desc"></textarea>
             </label>
             <div class="card-redactor__labels">
-                <span class="card-redactor__title">Labels</span>
+                <p class="card-redactor__title">Labels</p>
                 <label class="card__label card__label--UiDesign">
                     <input type="checkbox" name="labels" value="UiDesign">
                     <span>Ui Design</span>
@@ -93,10 +126,35 @@
                     <input type="checkbox" name="labels" value="Research">
                     <span>Research</span>
                 </label>
+                <div class="card-redactor__status-block">
+                    <p class="card-redactor__title">Desctiption</p>
+                    <p class="card-redactor__msg">Choose the label</p>
+                    <label class="card-redactor__status card-redactor__status--backlog">
+                        <input type="radio" name="status" value="backlog">
+                        <span>backlog</span>
+                    </label>
+                    <label class="card-redactor__status card-redactor__status--selected">
+                        <input type="radio" name="status" value="selected" >
+                        <span>selected</span>
+                    </label>
+                    <label class="card-redactor__status card-redactor__status--running">
+                        <input type="radio" name="status" value="running" >
+                        <span>running</span>
+                    </label>
+                    <label class="card-redactor__status card-redactor__status--evaluation">
+                        <input type="radio" name="status" value="evaluation" >
+                        <span>evaluation</span>
+                    </label>
+                    <label class="card-redactor__status card-redactor__status--live">
+                        <input type="radio" name="status" value="live" >
+                        <span>live</span>
+                    </label>
+                </div>
             </div>
             <button type="submit" class="card-redactor__btn">Submit</button>
         </form>
     </div>
+</div>
 </div>
 <script src="dist/index.js"></script>
 </body>

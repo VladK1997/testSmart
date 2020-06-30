@@ -1,0 +1,39 @@
+.operation{
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  &__content{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:after{
+      position: relative;
+      display: block;
+      text-align: center;
+      content:'';
+      color: #fff;
+      font-size: 60px;
+    }
+  }
+}
+.success .operation{
+  &__content{
+    background-color: $main-green;
+    &:after{
+      content: '\2714';
+    }
+  }
+}
+.error .operation{
+  &__content{
+    background-color: $main-red;
+    &:after{
+      content: "\2716";
+    }
+  }
+}

@@ -6,18 +6,21 @@
   background-color: #e8e8e8;
   border-radius: 10px;
   overflow: hidden;
-  label{
-    position: relative;
+
+  &> label{
     &:not(:first-child){
       margin-top: 16px;
     }
+  }
+  label{
+    position: relative;
+
     span{
       display: block;
-      margin-bottom: 8px;
     }
     input{
       &.error{
-        border: 1px solid red;
+        border: 1px solid $main-red;
       }
     }
     textarea{
@@ -27,24 +30,82 @@
     textarea,input{
       border-radius: 3px;
       width: 100%;
-      border: 1px solid lighten(darkgreen,10);
+      border: 1px solid lighten($main-grey ,10);
       font-size: 18px;
       padding: 4px 8px;
     }
   }
   &__title{
     font-size: 18px;
+    width: 100%;
+    margin-bottom: 12px;
   }
   &__labels{
     display: flex;
     flex-wrap: wrap;
     margin-top: 12px;
-    label{
+    & > label{
       margin-right: 12px;
     }
     span, label span{
       width: 100%;
       margin: 0;
+    }
+  }
+  &__status-block{
+    position: relative;
+    display: none;
+
+    flex-wrap: wrap;
+    margin-top: 16px;
+    &__status label{
+
+    }
+  }
+  &__msg{
+    position: absolute;
+    top: 100%;
+    right: 0;
+    visibility: hidden;
+    color: red;
+    font-weight: 600;
+    padding: 4px 0;
+  }
+
+  .status &__status-block{
+    display: flex;
+  }
+  &__status{
+    margin-right: 12px;
+    span{
+      padding: 4px 8px;
+      border-radius: 3px;
+      background-color: #cccccc;
+      transition: 0.3s;
+      text-transform: capitalize;
+      cursor: pointer;
+    }
+
+    input{
+      display: none;
+    }
+    input:checked + span,span:hover{
+      color: #fff;
+    }
+    &--backlog input:checked + span, &--backlog span:hover{
+      background-color: $main-grey;
+    }
+    &--selected input:checked + span,&--selected span:hover{
+      background-color: $main-yellow;
+    }
+    &--running input:checked + span,&--running span:hover{
+      background-color: $main-red;
+    }
+    &--evaluation input:checked + span,&--evaluation span:hover{
+      background-color: $main-blue;
+    }
+    &--live input:checked + span ,&--live span:hover{
+      background-color: $main-green;
     }
   }
   &__form{
@@ -72,5 +133,25 @@
     &:hover{
       background-color: lighten(darkcyan,10);
     }
+  }
+  &__operation{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+}
+.error + .card-redactor__msg,.error .card-redactor__msg{
+  visibility: visible;
+}
+.success, .error {
+  .card-redactor__operation{
+    visibility: visible;
+    opacity: 1;
   }
 }
