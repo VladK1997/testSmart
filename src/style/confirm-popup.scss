@@ -1,0 +1,39 @@
+.confirm-popup{
+  z-index: 2;
+  max-width: 600px;
+  width: 100%;
+
+  &__form{
+    display: flex;
+    flex-wrap: wrap;
+    padding:20px 30px;
+    background-color: #e8e8e8;
+  }
+  &__msg{
+    width: 100%;
+    font-size: 22px;
+    text-align: center;
+    span{
+      font-weight: 600;
+    }
+  }
+  &__btns{
+    margin-top: 24px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    button{
+      cursor: pointer;
+      transition: 0.3s;
+      border: none;
+      background-color: #cccccc;
+      font-size: 18px;
+      padding: 8px 12px;
+      margin-left: 24px;
+      &:hover{
+        background-color: darkcyan;
+        color: #e8e8e8;
+      }
+    }
+  }
+}

@@ -10,6 +10,9 @@
 </head>
 <body>
 <div class="d-none">
+    <svg id="del-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+        <path fill="currentColor" d="M268 416h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12zM432 80h-82.41l-34-56.7A48 48 0 0 0 274.41 0H173.59a48 48 0 0 0-41.16 23.3L98.41 80H16A16 16 0 0 0 0 96v16a16 16 0 0 0 16 16h16v336a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128h16a16 16 0 0 0 16-16V96a16 16 0 0 0-16-16zM171.84 50.91A6 6 0 0 1 177 48h94a6 6 0 0 1 5.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12z"></path>
+    </svg>
     <svg id="iconConfig" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"></path></svg>
 </div>
 <div class="page page--loading">
@@ -20,6 +23,9 @@
     <header class="header">
         <div class="header__tools">
             <p class="header__add-card add-card" data-cardRedactor="createstatus">+</p>
+            <button type="button" class="header__del-card" id="delAllcards" title="Delete all cards">
+                <svg><use xlink:href="#del-icon"></use></svg>
+            </button>
             <form id="search">
                 <label class="search">
                     <input type="text" autocomplete="false" name="search">
@@ -30,6 +36,7 @@
             </span>
                 </label>
             </form>
+
         </div>
     </header>
     <div class="content">
@@ -99,10 +106,14 @@
     <div class="popup__back" data-popupclose></div>
     <div class="card-redactor">
         <div class="card-redactor__operation operation">
-            <div class="operation__content"></div>
+            <div class="operation__icon"></div>
+            <p class="operation__msg"></p>
         </div>
         <p class="popup__title">Card redactor</p>
         <form class="card-redactor__form" id="cardForm">
+            <button type="button" name="delCard" class="card-redactor__del-card" title="Delete card">
+                <svg><use xlink:href="#del-icon"></use></svg>
+            </button>
             <label>
                 <p class="card-redactor__title">Title</p>
                 <input type="text" name="title">
@@ -155,6 +166,22 @@
         </form>
     </div>
 </div>
+    <div class="popup" id="confirm">
+        <div class="popup__back" data-popupclose></div>
+        <div class="confirm-popup">
+            <p class="popup__title">Confirmation</p>
+            <form class="confirm-popup__form">
+                <input hidden name="action" value="">
+                <p class="confirm-popup__msg">
+                    This action will <span></span>, are you sure?
+                </p>
+                <div class="confirm-popup__btns">
+                    <button type="button" value="false" data-popupclose>Cancel</button>
+                    <button type="submit" value="true">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 <script src="dist/index.js"></script>
 </body>

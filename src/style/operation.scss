@@ -1,10 +1,19 @@
 .operation{
   background-color: #fff;
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   transition: 0.3s;
-  &__content{
+  padding: 0 24px;
+  &__msg{
+    width: 100%;
+    margin-top: 16px;
+    font-size: 20px;
+    text-align: center;
+  }
+  &__icon{
     width: 100px;
     height: 100px;
     border-radius: 50%;
@@ -22,7 +31,7 @@
   }
 }
 .success .operation{
-  &__content{
+  &__icon{
     background-color: $main-green;
     &:after{
       content: '\2714';
@@ -30,7 +39,7 @@
   }
 }
 .error .operation{
-  &__content{
+  &__icon{
     background-color: $main-red;
     &:after{
       content: "\2716";

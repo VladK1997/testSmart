@@ -1,13 +1,36 @@
 //developer vladyslav Kukhlii 2020
-const fields = document.querySelectorAll('.col');
-const cardRedactor = document.getElementById('cardRedactor');
-const searchForm = document.getElementById('search');
-const cardForm = document.getElementById('cardForm');
 const page = document.querySelector('.page');
+const fields = document.querySelectorAll('.col');
+const cardForm = document.getElementById('cardForm');
+const searchForm = document.getElementById('search');
+const confirmPopup = document.getElementById('confirm');
+const buttonDelAll = document.getElementById('delAllcards');
+const cardRedactor = document.getElementById('cardRedactor');
+const confirmPopupForm = confirmPopup.querySelector('form');
+const cardRedactorMsg = cardRedactor.querySelector('.operation__msg');
+const confirmPopupMsg = confirmPopup.querySelector('.confirm-popup__msg span');
 const url = 'https://jsonbox.io/box_b282a1326a5c5dba1ad1';
 let fieldsObj = {};
 let currentPopup = null;
 let allCards = [];//here's put all cards
+(function() {
+    const confirmMethods = {
+        deleteAllCards: ()=>deleteAllCards(),
+    };
+    buttonDelAll.addEventListener('click',(e)=>{
+        confirmPopup.className += ' active';
+        confirmPopupForm.action.value = 'deleteAllCards';
+        console.log(confirmPopupForm.action.value);
+        currentPopup = confirmPopup;
+        confirmPopupMsg.innerText = 'delete all cards';
+    });
+    confirmPopupForm.addEventListener('submit',e=>{
+        e.preventDefault();
+        confirmMethods[confirmPopupForm.action.value]();
+
+
+    });
+})();
 
 //cardRedactor form, cardBuilder
 (function() {
@@ -34,22 +57,33 @@ let allCards = [];//here's put all cards
 
     window.addEventListener('click',e=>{
         if(e.target.hasAttribute('data-cardRedactor')){
+            let formAction = {
+                redact: e.target.dataset.cardredactor === 'redact',
+                create: e.target.dataset.cardredactor === 'create',
+                createstatus: e.target.dataset.cardredactor === 'createstatus',
+            };
             cardRedactor.className+= ' active';
             currentPopup = cardRedactor;
 
-            if(e.target.dataset.cardredactor === 'redact'){
+            if(formAction.redact){
                 let target = e.target;
-                let card = e.target.closest('.card');
+                let card = target.closest('.card');
                 let titleBlock = card.querySelector('.card__title');
                 let descBlock = card.querySelector('.card__desc');
                 let cardId = card.dataset.cardid;
-
+                cardForm.className += ' redact';
                 cardForm.title.value = titleBlock.innerText;
                 cardForm.desc.value = descBlock.innerText;
                 card.querySelectorAll('.card__label span').forEach(item=>{
                     cardForm.querySelector('.card__label--'+item.innerText+' input').checked = true;
                 });
-
+                cardForm.delCard.onclick = e =>{
+                  e.preventDefault();
+                  deleteCard({
+                      cardBlock:card,
+                      cardId:cardId
+                  })
+                };
                 cardForm.onsubmit = (e)=>{
                     e.preventDefault();
                     let labels = checkLabels(cardForm.labels);
@@ -65,23 +99,22 @@ let allCards = [];//here's put all cards
                         descBlock.innerText = newObj.desc;
                         card.querySelector('.card__labels').innerHTML = buildLabels(newObj.labels);
                     }).then(()=>{
-                        closeSuccess();
+                        closeWithStatus({status: 'success'})
                     })
                 }
-            }else if(e.target.dataset.cardredactor === 'create' || e.target.dataset.cardredactor === 'createstatus'){
+            }else if(formAction.create || formAction.createstatus){
                 let target = e.target;
-                let method = target.dataset.cardredactor;
                 let curStatus;
-                if(method === 'createstatus'){
+                if(formAction.createstatus){
                     cardForm.className += ' status';
                 }
                 cardForm.onsubmit = (e)=> {
                     e.preventDefault();
                     // console.log([] = cardForm.status);
                     if(cardForm.title.value) {
-                        if(method === 'create'){
+                        if(formAction.create){
                             curStatus = target.closest('.col').dataset.status;
-                        }else if(method === 'createstatus'){
+                        }else if(formAction.createstatus){
                             if(cardForm.status.value !== ''){
                                 console.log('i here');
                                 curStatus = cardForm.status.value;
@@ -101,7 +134,7 @@ let allCards = [];//here's put all cards
                             createCard(data);
                             updateCardsCounter();
                         }).then(()=>{
-                            closeSuccess();
+                            closeWithStatus({status: 'success'})
                         })
                     }else{
                         if(!cardForm.title.classList.contains('error')){
@@ -142,25 +175,19 @@ let allCards = [];//here's put all cards
     });
 
     function createCard(data){
-        console.log(typeof data,data);
+        console.log(data.iterable);
         if(data.length > 0 && data !=='string'){
-            let statusEvaluation = '';
-            let statusBacklog = '';
-            let statusSelected = '';
-            let statusRunning = '';
-            let statusLive = '';
-            data.forEach(item=>{
-                if(item.status === 'backlog') statusBacklog += buildCard(item);
-                if(item.status === 'evaluation')statusEvaluation += buildCard(item);
-                if(item.status === 'live')statusLive += buildCard(item);
-                if(item.status === 'running')statusRunning += buildCard(item);
-                if(item.status === 'selected')statusSelected += buildCard(item);
+            let outerHtmlOjb = {};
+            Object.keys(fieldsObj).forEach(item=>{
+                console.log(item);
+                outerHtmlOjb[item] = '';
             });
-            fieldsObj.backlog.contentBlock.insertAdjacentHTML('beforeend',statusBacklog);
-            fieldsObj.selected.contentBlock.insertAdjacentHTML('beforeend',statusSelected);
-            fieldsObj.running.contentBlock.insertAdjacentHTML('beforeend',statusRunning);
-            fieldsObj.evaluation.contentBlock.insertAdjacentHTML('beforeend',statusEvaluation);
-            fieldsObj.live.contentBlock.insertAdjacentHTML('beforeend',statusLive);
+            data.forEach(item=>{
+                outerHtmlOjb[item.status] += buildCard(item);
+            });
+            Object.keys(outerHtmlOjb).forEach(item=>{
+                fieldsObj[item].contentBlock.insertAdjacentHTML('beforeend',outerHtmlOjb[item]);
+            });
         }else if(typeof data === 'object'){
             fieldsObj[data.status].contentBlock.insertAdjacentHTML('beforeend',(buildCard(data)));
         }
@@ -178,7 +205,7 @@ let allCards = [];//here's put all cards
             '</div>'+
             '</div>';
         return cardHtml;
-    };
+    }
 
     function buildLabels(labelsArr){
         let labelsHtml = '';
@@ -189,7 +216,7 @@ let allCards = [];//here's put all cards
                 '</div>'
         });
         return labelsHtml;
-    };
+    }
 
     function checkLabels(labels){
         let labelsChecked = [];
@@ -202,22 +229,36 @@ let allCards = [];//here's put all cards
 
     }
 
-    function closeSuccess() {
-        cardRedactor.className+= ' success';
+    function closeWithStatus(obj) {
+        cardRedactor.className+= ' ' + obj.status;
+        cardRedactorMsg.innerText = obj.msg || '';
         setTimeout(()=>{
             clearRedactForm();
             closePopup();
-            cardRedactor.classList.remove('success');
-        },500)
+            cardRedactor.classList.remove(obj.status);
+        },1000)
     }
 
-    function clearDesk(){
-        fieldsObj.selected.contentBlock.innerHTML ='';
-        fieldsObj.backlog.contentBlock.innerHTML ='';
-        fieldsObj.running.contentBlock.innerHTML ='';
-        fieldsObj.evaluation.contentBlock.innerHTML ='';
-        fieldsObj.live.contentBlock.innerHTML ='';
+    function deleteCard(obj) {
+        return deleteData(obj.cardId)
+            .then((resolve)=>{
+                if(!resolve.ok){
+                    console.log(resolve.msg);
+                    closeWithStatus({status: 'error', msg: resolve.msg === 'string' ? resolve.msg : 'rejected'});
+                    return;
+                }
+                allCards = allCards.filter(item=>{
+                   if(item._id !== obj.cardId){
+                       return item
+                   }
+                });
+                obj.cardBlock.remove();
+                clearRedactForm();
+                closeWithStatus({status: 'success'})
+            })
+
     }
+
 
 })();
 
@@ -226,7 +267,7 @@ let allCards = [];//here's put all cards
 
     let currentDragItem = null;
 
-    fields.forEach(function(field){
+    fields.forEach(field=>{
         let key = field.dataset.status;
         fieldsObj[key] = {//here's the object witch is accessible in all functions, to get exact field
             block: field,
@@ -285,16 +326,24 @@ let allCards = [];//here's put all cards
     }
 
     function dragdrop(){
-        this.querySelector('[data-container]').append(currentDragItem);
+        if(currentDragItem){
+            this.querySelector('[data-container]').append(currentDragItem);
+            console.log(currentDragItem);
+
+            updateCardsCounter();
+            chengeStatus(currentDragItem,this.dataset.status);
+        }
         this.classList.remove('misty');
-        updateCardsCounter();
-        chengeStatus(currentDragItem,this.dataset.status);
     }
 
 
 })();
 
-
+function clearDesk(){
+    Object.keys(fieldsObj).forEach(item=>{
+        fieldsObj[item].contentBlock.innerHTML ='';
+    });
+}
 
 function closePopup(){
     currentPopup.classList.remove('active');
@@ -407,15 +456,29 @@ function setData(send){
 
 };
 
+function deleteAllCards() {
+    if(allCards.length > 0){
+        page.className += ' page--loading';
+        allCards.forEach(item => {
+            deleteData(item._id)
+        });
+        page.classList.remove('page--loading');
+        allCards = [];
+        clearDesk();
+        closePopup();
+    }else closePopup();
+
+}
+
 function deleteData(itemId){
-    console.log(itemId);
-    fetch(url +'/'+ itemId,{
+    return fetch(url +'/'+ itemId,{
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         },
-    })
-        .catch(error => {
-            console.log(error);
-        });
+    }).then((response)=>{
+        return {msg: response.json(), ok: response.ok};
+        }).catch(error => {
+        console.log(error);
+    });
 }
